@@ -18,9 +18,11 @@ class Reminder
 
     public function send(RemindUserInterface $user, string $message): void
     {
+        $username = $user->getName();
+
         $mail = new Email();
         $mail->to(addresses: $user->getEmail());
-        $mail->html(body: $message);
+        $mail->text(body: "Hello, $username. Pay attention to that $message");
 
         $this->mailer->send(message: $mail);
     }
